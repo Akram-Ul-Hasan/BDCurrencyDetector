@@ -6,8 +6,22 @@
 //
 
 import SwiftUI
+import CoreML
 
 struct ContentView: View {
+    
+    let model: BDCurrencyDetector?
+    
+    init() {
+        do {
+            let config = MLModelConfiguration()
+            model = try BDCurrencyDetector(configuration: config)
+        } catch {
+            print("Failed to load model: \(error)")
+            model = nil
+        }
+    }
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
